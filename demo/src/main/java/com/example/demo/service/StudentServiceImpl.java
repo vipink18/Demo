@@ -1,6 +1,7 @@
 package com.example.demo.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -14,6 +15,9 @@ public class StudentServiceImpl implements StudentService{
 	@Autowired
 	private StudentRepository repo;
 	
+//	@Autowired
+//	private Student st;
+	
 	@Override
 	public Student add(Student student) {
 		
@@ -22,8 +26,12 @@ public class StudentServiceImpl implements StudentService{
 
 	@Override
 	public String update(int sId, Student student)throws Exception {
-		repo.findById(sId).orElseThrow( () -> new Exception("Id not found"));
-		repo.save(student);
+		Student s=repo.findById(sId).orElseThrow( () -> new Exception("Id not found"));
+		
+		
+		
+		s.setsMobileNo(student.getsMobileNo());		
+		repo.save(s);
 		return "Updated successfully ";
 	}
 
@@ -35,7 +43,7 @@ public class StudentServiceImpl implements StudentService{
 	}
 
 	@Override
-	public Student get(int sId) throws Exception{
+	public Student getById(int sId) throws Exception{
 		 
 		return repo.findById(sId).orElseThrow( () -> new Exception("Id not found"));
 	}
@@ -44,6 +52,13 @@ public class StudentServiceImpl implements StudentService{
 	public List<Student> getAll() {
 		
 		return repo.findAll();
+	}
+
+	@Override
+	public Student getStudentBySubId(int subId) {
+		
+		Student stud = repo.findById(subId).get();
+		return stud;
 	}
 
 }

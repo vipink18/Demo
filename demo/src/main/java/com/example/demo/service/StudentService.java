@@ -12,8 +12,11 @@ public interface StudentService {
 	
 	String delete(int sId)throws Exception;
 	
-	Student get(int sId)throws Exception;
+	Student getById(int sId)throws Exception ;
+	
 	
 	List<Student> getAll();
+
+	Student getStudentBySubId(int subId);
 
 }

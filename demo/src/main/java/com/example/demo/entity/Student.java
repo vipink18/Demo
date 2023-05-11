@@ -1,10 +1,11 @@
 package com.example.demo.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
 
 @Entity
 @Table(name = "student_spring_data")
@@ -17,6 +18,10 @@ public class Student {
 	private String sName;
 	private String sCity;
 	private String sMobileNo;
+	
+	@OneToOne
+	private Subject subject;
+	
 	public int getsId() {
 		return sId;
 	}
@@ -41,13 +46,29 @@ public class Student {
 	public void setsMobileNo(String sMobileNo) {
 		this.sMobileNo = sMobileNo;
 	}
+	
+	public Student(int sId, String sName, String sCity, String sMobileNo, Subject subject) {
+		super();
+		this.sId = sId;
+		this.sName = sName;
+		this.sCity = sCity;
+		this.sMobileNo = sMobileNo;
+		this.subject = subject;
+	}
 	@Override
 	public String toString() {
-		return "Student [sId=" + sId + ", sName=" + sName + ", sCity=" + sCity + ", sMobileNo=" + sMobileNo + "]";
+		return "Student [sId=" + sId + ", sName=" + sName + ", sCity=" + sCity + ", sMobileNo=" + sMobileNo
+				+ ", subject=" + subject + "]";
 	}
 	public Student() {
 		super();
 		// TODO Auto-generated constructor stub
+	}
+	public Subject getSubject() {
+		return subject;
+	}
+	public void setSubject(Subject subject) {
+		this.subject = subject;
 	}
 	
 	
