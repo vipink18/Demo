@@ -1,9 +1,12 @@
 package com.example.demo.entity;
 
+import java.util.List;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -21,6 +24,9 @@ public class Student {
 	
 	@OneToOne
 	private Subject subject;
+	
+	@OneToMany
+	private List<Books> books;
 	
 	public int getsId() {
 		return sId;
@@ -47,18 +53,20 @@ public class Student {
 		this.sMobileNo = sMobileNo;
 	}
 	
-	public Student(int sId, String sName, String sCity, String sMobileNo, Subject subject) {
+
+	public Student(int sId, String sName, String sCity, String sMobileNo, Subject subject, List<Books> books) {
 		super();
 		this.sId = sId;
 		this.sName = sName;
 		this.sCity = sCity;
 		this.sMobileNo = sMobileNo;
 		this.subject = subject;
+		this.books = books;
 	}
 	@Override
 	public String toString() {
 		return "Student [sId=" + sId + ", sName=" + sName + ", sCity=" + sCity + ", sMobileNo=" + sMobileNo
-				+ ", subject=" + subject + "]";
+				+ ", subject=" + subject + ", books=" + books + "]";
 	}
 	public Student() {
 		super();
@@ -70,6 +78,15 @@ public class Student {
 	public void setSubject(Subject subject) {
 		this.subject = subject;
 	}
+	public List<Books> getBooks() {
+		return books;
+	}
+	public void setBooks(List<Books> books) {
+		this.books = books;
+	}
+	
+	
+	
 	
 	
 }

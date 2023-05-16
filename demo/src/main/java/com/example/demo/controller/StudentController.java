@@ -12,12 +12,13 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.demo.entity.Books;
 import com.example.demo.entity.Student;
 import com.example.demo.entity.Subject;
+import com.example.demo.repository.BookRepository;
 import com.example.demo.repository.SubjectRepository;
+import com.example.demo.service.BookingService;
 import com.example.demo.service.StudentService;
-import com.example.demo.service.StudentServiceImpl;
-import com.example.demo.service.SubjectService;
 
 @RestController
 public class StudentController {
@@ -26,6 +27,12 @@ public class StudentController {
 	private StudentService service;
 	@Autowired
 	private SubjectRepository subjectRepository;
+	
+	@Autowired
+	private BookRepository bookRepository;
+	
+	@Autowired
+	BookingService bookingService;
 	
 	@PostMapping("/student/add")
 	Student add(@RequestBody Student student) {
@@ -67,6 +74,17 @@ public class StudentController {
 		System.out.println(student);
 		service.add(student);		
 		return student;
+		
+	}
+	
+	@PostMapping("/book/assignBookToStudent/{stuId}/{bookId}")
+	public Student assignBookToStudent(@PathVariable int stuId,@PathVariable int bookId) throws Exception {
+		Student student=service.getById(stuId);
+		System.out.println(student);
+		Books books=bookingService.getById(bookId);
+		System.out.println(books);
+		student.getBooks().add(books);
+		return service.add(student);
 		
 	}
 	

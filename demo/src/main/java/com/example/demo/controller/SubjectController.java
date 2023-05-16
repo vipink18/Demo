@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.demo.entity.Student;
@@ -70,16 +70,7 @@ public class SubjectController {
 	@GetMapping("/avg/{subId}")
 	String avg(@PathVariable int subId) throws Exception{
 	double average = service.avg(subId);
-	
-	
-	try {
-		Student	student = studentService.getStudentBySubId(subId);
-	} catch (Exception e) {
-		// TODO Auto-generated catch block
-		e.printStackTrace();
-	}
-	
-			return "Average marks of "+studentService.getStudentBySubId(subId).getsName()+" is  "+average;
+		return "Average marks of "+studentService.getStudentBySubId(subId).getsName()+" is  "+average;
 	}
 	
 }
