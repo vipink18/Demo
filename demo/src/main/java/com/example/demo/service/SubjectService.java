@@ -10,9 +10,9 @@ public interface SubjectService {
 	
 	
 	//add marks(Math,English,science))
-	Subject add(Subject subject);
+	Subject addSubject(Subject subject);
 	
-	Subject getById(int subId) throws Exception;
+	Subject getBySubjectId(int subId) throws Exception;
 	
 	
 	int getMarks(int subId,String subName)throws Exception;
@@ -20,10 +20,10 @@ public interface SubjectService {
 	List<Subject> getAllMarks();
 	
 	//update marks
-	String update(int subId,Subject subject)throws Exception;
+	String updateSubject(int subId,Subject subject)throws Exception;
 	
 	//delete marks
-	String delete(int subId)throws Exception;
+	String deleteSubject(int subId)throws Exception;
 	
 	
 	

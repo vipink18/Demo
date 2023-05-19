@@ -6,17 +6,25 @@ import com.example.demo.entity.Student;
 
 public interface StudentService {
 	
-	Student add(Student student);
+	Student addStudent(Student student);
 	
-	String update(int sId, Student student) throws Exception;
+	String updateStudent(int sId, Student student) throws Exception;
 	
-	String delete(int sId)throws Exception;
+	String deleteStudent(int sId)throws Exception;
 	
-	Student getById(int sId)throws Exception ;
-	
-	
-	List<Student> getAll();
+	Student getByStudentId(int sId)throws Exception ;
 
-	Student getStudentBySubId(int subId);
+	List<Student> getAllStudent();
+	
+	
+	/*
+	 * List<Student> getAll();
+	 * 
+	 * Student getStudentBySubId(int subId);
+	 * 
+	 * Student getsId(int bookId);
+	 * 
+	 * public void saveAll(List<Student> result);
+	 */
 
 }

@@ -23,7 +23,7 @@ import com.example.demo.service.SubjectService;
 public class SubjectController {
 
 	@Autowired
-	private SubjectService service;
+	private SubjectService subjectService;
 	
 	@Autowired
 	private StudentService studentService;
@@ -32,11 +32,11 @@ public class SubjectController {
 	//add marks(Math,English,science))IMP
 	@PostMapping("/add/{sId}")
 	Subject add(@RequestBody Subject subject,@PathVariable int sId) throws Exception {
-		service.add(subject);
-		Student student = studentService.getById(sId);
+		subjectService.addSubject(subject);
+		Student student = studentService.getByStudentId(sId);
 		student.setSubject(subject);
 		
-		studentService.add(student);
+		studentService.addStudent(student);
 		
 		
 		return subject;
@@ -44,33 +44,34 @@ public class SubjectController {
 	
 	@GetMapping("/get/{id}/{subName}")
 	int getMarks(@PathVariable int subId,@PathVariable String subName)throws Exception{
-		return service.getMarks(subId, subName);
+		return subjectService.getMarks(subId, subName);
 	}
 	
 	@GetMapping("/getAll")
 	List<Subject> getAllMarks(){
-		return service.getAllMarks();
+		return subjectService.getAllMarks();
 	}
 	
 	//update marks
 	@PutMapping("/update/{subId}")
 	String update(@PathVariable int subId,@RequestBody Subject subject)throws Exception{
-		return service.update(subId, subject);
+		return subjectService.updateSubject(subId, subject);
 	}
 	
 	//delete marks
 	@DeleteMapping("/delete/{subId}")
 	String delete(@PathVariable int subId)throws Exception{
-		return service.delete(subId);
+		return subjectService.deleteSubject(subId);
 	}
 	
 	
 	
-	//average marks
-	@GetMapping("/avg/{subId}")
-	String avg(@PathVariable int subId) throws Exception{
-	double average = service.avg(subId);
-		return "Average marks of "+studentService.getStudentBySubId(subId).getsName()+" is  "+average;
-	}
-	
+	/*
+	 * //average marks
+	 * 
+	 * @GetMapping("/avg/{subId}") String avg(@PathVariable int subId) throws
+	 * Exception{ double average = service.avg(subId); return
+	 * "Average marks of "+studentService.getStudentBySubId(subId).getsName()
+	 * +" is  "+average; }
+	 */
 }

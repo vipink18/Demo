@@ -15,14 +15,14 @@ public class SubjectServiceImpl implements SubjectService {
 	private SubjectRepository repo;
 	
 	@Override
-	public Subject add(Subject subject) {
+	public Subject addSubject(Subject subject) {
 		Subject s = repo.save(subject);
 		System.out.println(" added ");
 		return s;
 	}
 
 	@Override
-	public String update(int subId, Subject subject) throws Exception {
+	public String updateSubject(int subId, Subject subject) throws Exception {
 		repo.findById(subId).orElseThrow( () -> new Exception("Id not found"));
 		
 		//repo.save(s);
@@ -31,7 +31,7 @@ public class SubjectServiceImpl implements SubjectService {
 	}
 
 	@Override
-	public String delete(int subId)throws Exception {
+	public String deleteSubject(int subId)throws Exception {
 		repo.findById(subId).orElseThrow( () -> new Exception("Id not found"));
 		return " Data of a particuar Student has been deleted "+subId;
 	}
@@ -47,7 +47,7 @@ public class SubjectServiceImpl implements SubjectService {
 		return avg;
 	}
 
-	@SuppressWarnings("unlikely-arg-type")
+	
 	@Override
 	public int getMarks(int subId, String subName) throws Exception {
 		repo.findById(subId).orElseThrow( () -> new Exception("Id not found"));
@@ -74,7 +74,7 @@ public class SubjectServiceImpl implements SubjectService {
 	}
 
 	@Override
-	public Subject getById(int subId) throws Exception{
+	public Subject getBySubjectId(int subId) throws Exception{
 		return repo.findById(subId).orElseThrow( ()-> new Exception("No such id"+subId+" found"));
 //		return null;
 	}
